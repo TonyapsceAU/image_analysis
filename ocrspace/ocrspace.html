@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>OCR.space API Example</title>
+  </head>
+<!-- ============================================= -->
+
+
+  <body>
+    <form id="ocr-form">
+      <label for="ocr-input">Enter image URL or upload image:</label><br>
+      <input type="file" id="ocr-file" name="image"><br>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="ocr-image" ></div>
+    <div id="ocr-result" style="border:thin" ></div>
+
+<!-- ============================================= -->
+
+
+    <script>
+      const apiKey = 'K81797367888957';
+      const ocrForm = document.querySelector('#ocr-form');
+      const ocrImage = document.querySelector('#ocr-image');
+      const ocrResult = document.querySelector('#ocr-result');
+      ocrForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const ocrFile = document.querySelector('#ocr-file');
+        const formData = new FormData();
+        if (ocrFile.files.length > 0) {
+          const file = ocrFile.files[0];
+          const reader = new FileReader();
+          reader.onload = function() {
+            ocrImage.innerHTML = `<img src="${reader.result}" alt="Uploaded Image" width="75%">`;
+          };
+          reader.readAsDataURL(file);
+          formData.append('image', file);
+        } else {
+          ocrResult.innerHTML = 'Please enter a URL or upload an image.';
+          return;
+        }
+        fetch('https://api.ocr.space/parse/image', {
+          method: 'POST',
+          headers: {
+            'apikey': apiKey
+          },
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.ParsedResults && data.ParsedResults.length > 0) {
+            const ocrText = data.ParsedResults[0].ParsedText;
+            ocrResult.innerHTML = ocrText;
+          } else {
+            ocrResult.innerHTML = 'Failed to recognize text.';
+          }
+        })
+        .catch(error => {
+          ocrResult.innerHTML = `Error: ${error.message}`;
+        });
+      });
+    </script>
+
+
+
+  </body>
+</html>
