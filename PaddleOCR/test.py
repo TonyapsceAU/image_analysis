@@ -1,7 +1,7 @@
 from paddleocr import PaddleOCR, draw_ocr
 
 # Also switch the language by modifying the lang parameter
-ocr = PaddleOCR(lang="japan") # The model file will be downloaded automatically when executed for the first time
+ocr = PaddleOCR(lang="japan", det=True) # The model file will be downloaded automatically when executed for the first time
 img_path ="Training_data/test/japanese_hiragana.jpg"
 result = ocr.ocr(img_path)
 # Recognition and detection can be performed separately through parameter control

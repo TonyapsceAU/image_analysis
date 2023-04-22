@@ -1,0 +1,2 @@
+3.11.3
+with pip3 install torch torchvision torchaudio (Without GPU)
