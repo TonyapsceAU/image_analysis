@@ -43,7 +43,8 @@
         fetch('https://api.ocr.space/parse/image', {
           method: 'POST',
           headers: {
-            'apikey': apiKey
+            'apikey': apiKey,
+            'language': 'jpn'
           },
           body: formData
         })
