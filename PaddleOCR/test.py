@@ -2,7 +2,7 @@ from paddleocr import PaddleOCR, draw_ocr
 
 # Also switch the language by modifying the lang parameter
 ocr = PaddleOCR(lang="japan", det=True) # The model file will be downloaded automatically when executed for the first time
-img_path ="Training_data/test/japanese_hiragana.jpg"
+img_path ="Training_data/test/japanese.jpg"
 result = ocr.ocr(img_path)
 # Recognition and detection can be performed separately through parameter control
 # result = ocr.ocr(img_path, det=False)  Only perform recognition
@@ -19,4 +19,4 @@ txts = [line[1][0] for line in result]
 scores = [line[1][1] for line in result]
 im_show = draw_ocr(image, boxes, txts, scores, font_path='/path/to/PaddleOCR/doc/fonts/japan.ttf')
 im_show = Image.fromarray(im_show)
-im_show.save('j_h.jpg')
+im_show.save('j_h.jpg') #No image output
