@@ -230,9 +230,9 @@ def output_images_from_rectangles(image_path, rectangles, output_prefix):
 
 
 # Folder path for input images
-input_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/text_example'
+input_folder_path = 'img_analisi/text_example'
 # Create the "output" folder if it doesn't exist
-output_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/v3/output'
+output_folder_path = 'img_analisi/v3/output'
 if not os.path.exists(output_folder_path):
     os.makedirs(output_folder_path)
 # Process each image in the input folder
