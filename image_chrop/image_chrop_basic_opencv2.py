@@ -33,11 +33,7 @@ def draw_rectangles(image_path, rectangles):
 
 # Folder path for input images
 input_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/text_example'
-# Create the "output" folder if it doesn't exist
-output_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/v3/output'
-if not os.path.exists(output_folder_path):
-    os.makedirs(output_folder_path)
-    
+
 # Process each image in the input folder
 for filename in os.listdir(input_folder_path):
     if filename.endswith('.jpg') or filename.endswith('.png'):
