@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <style>
+        .container {
+            display: flex;
+        }
+
+        .image-container {
+            flex: 1;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 500px;
+        }
+
+        .scrollable-list {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 500px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Viewer</h1>
+    <input type="file" id="folderPicker" webkitdirectory directory multiple>
+    <button id="startButton" disabled>Start</button>
+    <div class="container">
+        <div class="image-container">
+            <img id="currentImage">
+        </div>
+        <div class="scrollable-list" id="imageList"></div>
+    </div>
+    <pre id="imageInfo"></pre>
+
+    <script src="script.js"></script>
+</body>
+</html>
