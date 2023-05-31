@@ -144,15 +144,10 @@ function displayImage(index) {
 }
 
 function displayQuadtreeImages(quadtreeIndex) {
-    var quadtreeImg = document.getElementById('imageList');
-    // quadtree.images[quadtreeIndex] is an actual image element 
-    // get from this :
-    // let inputImage = new Image();
-    // inputImage.src = images_path[currentIndex];
-    // quadtree.checkImg(inputImage, 0, 0);
-
-    // quadtreeImg.src = URL.createObjectURL(quadtree.images[quadtreeIndex].image);
-}
+    let inputImage = new Image();
+    inputImage.src = quadtree.images[quadtreeIndex];
+    document.getElementById('imageList').appendChild(inputImage);
+  }
 
 function handleArrowKeys(event) {
     if (event.keyCode === 37) { // Left arrow key
