@@ -1,34 +1,41 @@
 import os
-import tempfile
-import PyPDF2
 from PIL import Image
-from image_quadtree import Quadtree
+import cv2
+from image_quardtree import Quadtree
+# import tempfile
+# import PyPDF2
 
-def convert_pdf_to_jpg(pdf_path):
-    # Create a temporary directory to store intermediate files
-    with tempfile.TemporaryDirectory() as temp_dir:
-        # Open the PDF file
-        with open(pdf_path, 'rb') as pdf_file:
-            pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+# def convert_pdf_to_jpg(pdf_path):
+#     # Create a temporary directory to store intermediate files
+#     with tempfile.TemporaryDirectory() as temp_dir:
+#         # Open the PDF file
+#         with open(pdf_path, 'rb') as pdf_file:
+#             pdf_reader = PyPDF2.PdfFileReader(pdf_file)
 
-            # Convert each page of the PDF to JPEG
-            for page_num in range(pdf_reader.numPages):
-                # Convert the current page to an image
-                pdf_page = pdf_reader.getPage(page_num)
-                pdf_page.scale(2)  # Increase scale if necessary
-                pdf_page.cropBox.lowerLeft = (0, 0)  # Remove margins if necessary
-                pdf_page.cropBox.upperRight = (pdf_page.mediaBox.getUpperRight_x(), pdf_page.mediaBox.getUpperRight_y())  # Remove margins if necessary
+#             # Convert each page of the PDF to JPEG
+#             for page_num in range(pdf_reader.numPages):
+#                 # Convert the current page to an image
+#                 pdf_page = pdf_reader.getPage(page_num)
+#                 pdf_page.scale(2)  # Increase scale if necessary
+#                 pdf_page.cropBox.lowerLeft = (0, 0)  # Remove margins if necessary
+#                 pdf_page.cropBox.upperRight = (pdf_page.mediaBox.getUpperRight_x(), pdf_page.mediaBox.getUpperRight_y())  # Remove margins if necessary
 
-                # Render the page as an image
-                image = pdf_page.to_image()
+#                 # Render the page as an image
+#                 image = pdf_page.to_image()
 
-                # Save the image as a temporary file
-                temp_image_path = os.path.join(temp_dir, f'page{page_num + 1}.jpg')
-                image.save(temp_image_path, 'JPEG')
+#                 # Save the image as a temporary file
+#                 temp_image_path = os.path.join(temp_dir, f'page{page_num + 1}.jpg')
+#                 image.save(temp_image_path, 'JPEG')
 
-    return temp_image_path
+#     return temp_image_path
 
-
+def show_img(image_path):
+    # Load the image
+    image = cv2.imread(image_path)
+    # Display the image with rectangles
+    cv2.imshow('Image with Speech Bubbles', image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 def combine_words(images):
     merging = True
@@ -101,49 +108,73 @@ def combine_image(img1, img2):
 
     return (image_combined, x_combined, y_combined, w_combined, h_combined)
 
-
+def show_images(images):
+    for datas in images:
+        img, _, _, _, _, = datas
+        cv2.imshow('Image with Speech Bubbles', img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    
 
 # Folder path for input images
-input_folder_path = 'kbsicnjksdcnj/input'
-
+input_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/text_example'
 # Create the "output" folder if it doesn't exist
-output_folder_path = 'kbsicnjksdcnj/output'
+output_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/v3/output'
 if not os.path.exists(output_folder_path):
-    os.makedirs(output_folder_path)
+    os.makedirs(output_folder_path) 
+
+# word_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/v3/word'
+# if not os.path.exists(word_folder_path):
+#     os.makedirs(word_folder_path)
+# other_folder_path = '/Users/aushunying/Documents/coding/python/img_analisi/v3/other'
+# if not os.path.exists(other_folder_path):
+#     os.makedirs(other_folder_path)
     
     
 # Process each image in the input folder
+coun = 0
 for filename in os.listdir(input_folder_path):
+    if coun==2:
+        break
     # Convert the PDF to JPEG
-    if image_path.lower().endswith('.pdf'):
-        image_path = convert_pdf_to_jpg(image_path)
+    if filename.lower().endswith('.pdf'):
+        image_path = convert_pdf_to_jpg(input_folder_path)
     
     if filename.endswith('.jpg') or filename.endswith('.png'):
         image_path = os.path.join(input_folder_path, filename)
-        
+    print(image_path)
+    show_img(image_path)
+    
+    
     # Load the image
-    image = cv2.imread(image_path)
-    image.show()
+    image = Image.open(image_path)
     
     # find all words in images
-    image_quadtree = Quadtree(4)
-    image_quadtree.check_img(image)
-    for datas in imaimage_quadtree.images:
+    image_quadtree = Quadtree()
+    image_quadtree.check_img(image,0,0)
+    # print(len(image_quadtree.images),image.size)
+    for datas in image_quadtree.images:
         img, _, _, _, _, = datas
-        img.show()
+        cv2.imshow('Image with Speech Bubbles', img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         
     
     # combine words into seach bobble
-    images = combine_words(imaimage_quadtree.imagesges)
-    for datas in images.images:
+    images = combine_words(image_quadtree.images)
+    for datas in images:
         img, _, _, _, _, = datas
-        img.show()
+        cv2.imshow('Image with Speech Bubbles', img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     
     # do ocr to images
     
     # replace speach bobble image with text
     
     # place speach bobble back 
+    
+    coun+=1
     
         
             
