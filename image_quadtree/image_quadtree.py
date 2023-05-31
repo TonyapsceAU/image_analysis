@@ -1,50 +1,50 @@
-from check_word import Check_word
+from keras.models import load_model  # TensorFlow is required for Keras to work
+from PIL import Image, ImageOps  # Install pillow instead of PIL
+import numpy as np
 
-class Quadtree:
-    def __init__(self, capacity):
-        self.capacity = capacity
-        self.images = []
-        self.divided = False
-        self.northeast = None
-        self.northwest = None
-        self.southeast = None
-        self.southwest = None
+def check_word(image):
+    # Disable scientific notation for clarity
+    np.set_printoptions(suppress=True)
 
-    def check_img(self,image,x,y):
-        if check_word(image):
-            self.images.append((image,x,y)) 
-        else :
-            if not self.divided:
-                images = self.subdivide(image,x,y)
-                
-            
-            w = image.width
-            h = image.height
-            if self.northeast.check_img(images[0],x+w/2,y):
-                return True
-            elif self.northwest.check_img(images[1],x,y):
-                return True
-            elif self.southeast.check_img(images[2],x+w/2,y+h/2):
-                return True
-            elif self.southwest.check_img(images[3],x,y+h/2):
-                return True
+    # Load the model
+    model = load_model("keras_Model.h5", compile=False)
 
-    def subdivide(self,image,x,y):
-        w = image.width
-        h = image.height
+    # Load the labels
+    class_names = open("labels.txt", "r").readlines()
 
-        self.northeast = Quadtree(self.capacity)
-        self.northwest = Quadtree(self.capacity)
-        self.southeast = Quadtree(self.capacity)
-        self.southwest = Quadtree(self.capacity)
+    # Create the array of the right shape to feed into the keras model
+    # The 'length' or number of images you can put into the array is
+    # determined by the first position in the shape tuple, in this case 1
+    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-        self.divided = True
+    # Replace this with the path to your image
+    image = image.convert("RGB")
+
+    # resizing the image to be at least 224x224 and then cropping from the center
+    size = (224, 224)
+    image = ImageOps.fit(image, size, Image.Resampling.LANCZOS)
+
+    # turn the image into a numpy array
+    image_array = np.asarray(image)
+
+    # Normalize the image
+    normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
+
+    # Load the image into the array
+    data[0] = normalized_image_array
+
+    # Predicts the model
+    prediction = model.predict(data)
+    index = np.argmax(prediction)
+    class_name = class_names[index]
+    confidence_score = prediction[0][index]
+
+    # # Print prediction and confidence score
+    # print("Class:", class_name[2:], end="")
+    # print("Confidence Score:", confidence_score)
+    if confidence_score > 0.5 :
+        return True
+    else:
+        return False
+    
         
-        images = []
-        images.append(image[y:y+h/2, x+w/2:x+w])
-        images.append(image[y:y+h/2, x:x+w/2])
-        images.append(image[y+h/2:y+h, x+w/2:x+w])
-        images.append(image[y+h/2:y+h, x:x+w/2])
-        
-        
-        return images
