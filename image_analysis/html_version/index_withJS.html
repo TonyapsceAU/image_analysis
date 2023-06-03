@@ -174,9 +174,9 @@
             var imageInfo = document.getElementById('imageInfo');
             imageInfo.innerText = `Folder: ${images_path[index].webkitRelativePath.split("/").slice(0, -1).join("/")}\nImage: ${images_path[index].name}`;
 
-            if (index === images_path.length - 1) {
-                imageInfo.innerText += "\n\nAll images have been shown";
-            }
+            // if (index === images_path.length - 1) {
+            //     imageInfo.innerText += "\n\nAll images have been shown";
+            // }
         }
 
         function displayQuadtreeImages(quadtreeIndex) {
@@ -199,27 +199,28 @@
             displayImage(currentIndex);
             quadtree = new Quadtree();
             let inputImage = new Image();
-            inputImage.src = images_path[currentIndex];
+            inputImage.src = URL.createObjectURL(images_path[currentIndex]);
             document.getElementById('imageList').appendChild(inputImage);
         }
 
         function run(){
-            if (currentIndex === 0) { // check if function has already been called
+            // if (currentIndex === 0) { // check if function has already been called
                 displayImage(currentIndex);
                 quadtree = new Quadtree();
                 let inputImage = new Image();
-                inputImage.src = images_path[currentIndex];
-                document.getElementById('imageList').appendChild(inputImage);
+                inputImage.src = URL.createObjectURL(images_path[currentIndex]);
+                document.getElementById('imageList').appendChild(inputImage); //The first quadimage after click "start"
+
 
                 // create img elements for each image in images_path array
-                for (let i = 0; i < images_path.length; i++) {
-                    let img = new Image();
-                    img.src = URL.createObjectURL(images_path[i]);
-                    document.getElementById('imageList').appendChild(img);
-                }
+                // for (let i = 0; i < images_path.length; i++) {
+                //     let img = new Image();
+                //     img.src = URL.createObjectURL(images_path[i]);
+                //     document.getElementById('imageList').appendChild(img);
+                // }
 
                 document.addEventListener('keydown', handleArrowKeys);
-            }
+            // }
         }
         document.getElementById('folderPicker').addEventListener('change', load_images_paths);
         document.getElementById('startButton').addEventListener('click', run);
