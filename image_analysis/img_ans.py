@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 import cv2
-from image_quardtree import Quadtree
+from image_quadtree import Quadtree
 # import tempfile
 # import PyPDF2
 
