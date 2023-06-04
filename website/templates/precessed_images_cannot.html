@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processed Images</title>
+    <style>
+        img {
+            width: 50%;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Processed Images</h1>
+    <div id="image-container">
+        <img id="current-image" src="" data-image="image1.jpg">
+    </div>
+
+    <script>
+        var currentIndex = 0;
+        var images = ["image1.jpg", "image2.jpg", "image3.jpg"]; // Replace with your image filenames
+
+        var currentImage = document.getElementById("current-image");
+        var imageFilename = currentImage.getAttribute("data-image");
+        currentImage.src = "static/upload/" + imageFilename; // Replace "static/upload/" with the actual path to your images
+
+        function updateImage() {
+            var currentImage = document.getElementById("current-image");
+            currentImage.src = "static/upload/" + images[currentIndex]; // Replace "static/upload/" with the actual path to your images
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateImage();
+            } else if (event.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateImage();
+            }
+        });
+    </script>
+</body>
+</html>
