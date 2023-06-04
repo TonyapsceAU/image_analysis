@@ -13,16 +13,25 @@
 <body>
     <h1>Processed Images</h1>
     <div id="image-container">
-        <img id="current-image" src="{{ url_for('static', filename='upload/' + OGimages[0]) }}">
+        <!-- <img id="current-image" src="{{ url_for('static', filename='upload/' + OGimages[0]) }}"> -->
+        <!-- <img id="current-image" src="{{ url_for('static', filename='upload/' + OGimages[0]) }}" data-image="{{OGimages[0]}}"> -->
+        <img id="current-image" src="data:;base64,{{ OGimages[0] }}">
     </div>
 
     <script>
         var currentIndex = 0;
-        var images = {{ OGimages|tojson }};
+        // var images = {{ OGimages|tojson }};
+        let currentImage = new Image();
+        var imageFilename = currentImage.getAttribute("data-image");
+        currentImage.src = URL.createObjectURL("{{ url_for('static', filename='upload/') }}" + imageFilename);
+        document.getElementById("currentImage");
 
         function updateImage() {
-            var currentImage = document.getElementById("current-image");
-            currentImage.src = "{{ url_for('static', filename='upload/') }}" + images[currentIndex];
+            // var currentImage = document.getElementById("current-image");
+            // currentImage.src = "{{ url_for('static', filename='upload/') }}" + images[currentIndex];
+            let currentImage = new Image();
+            currentImage.src = URL.createObjectURL("{{ url_for('static', filename='upload/') }}" + images[currentIndex]);
+            document.getElementById("current-image");
         }
 
         document.addEventListener('keydown', function(event) {
