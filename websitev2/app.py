@@ -55,21 +55,17 @@ def processed_images():
         image_quadtree = Quadtree()
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
         image = Image.open(image_path)
-        image_quadtree.check_img("temporary/",image)
-        # image_quadtree.check_img("temporary/"+image_name.split('.')[0]+"_",image)
-        words_images = image_quadtree.get_images()
-
-        count_digits = len(str(len(words_images)))
-        for i, word_image_tuple in enumerate(words_images):
-            word_image = word_image_tuple[0]  # Extract the actual image from the tuple
-            count_str = str(i+1).zfill(count_digits)
-            filename = f"{image_name.split('.')[0]}_{count_str}.{image_name.split('.')[1]}"
-            # word_image = Image.open("temporary/"+word_image_tuple)
-            # filename = word_image_tuple
+    
+        image_quadtree.check_img("temporary/"+image_name.split('.')[0]+"_",image)
+        words_images_path = image_quadtree.get_images()
+        
+        for words_image_path in words_images_path:
+            word_image = Image.open("temporary/"+words_image_path)
+            filename = words_image_path
             word_image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            os.remove("temporary/"+words_image_path)
             
-    # origenal_images = os.listdir(app.config['UPLOAD_FOLDER'])
-
+    # return render_template('myconsole.html', info=words_images_path)
     return render_template('processed_images.html', OGimages=origenal_images)
 
 
