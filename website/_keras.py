@@ -36,7 +36,7 @@ data[0] = normalized_image_array
 
 # Predicts the model
 prediction = model.predict(data)
-index = np.argmax(prediction)
+index = 1
 class_name = class_names[index]
 confidence_score = prediction[0][index]
 
