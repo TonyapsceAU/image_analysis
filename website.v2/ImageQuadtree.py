@@ -17,7 +17,7 @@ class Quadtree:
             w, h = current_image.size
             
             if check_word(current_image) > 0.5 or w <= lengh or h <= lengh:
-                self.images.append(current_path[len("temporary/"):]+".jpg") 
+                self.images.append(current_path[len("website.v2/temporary/"):]+".jpg") 
             else:
                 devided_images = self.subdivide(current_image)
                 for i in range(0,len(devided_images)):
