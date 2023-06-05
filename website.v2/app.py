@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
-import urllib.request
+# import urllib.request
 import os
 from werkzeug.utils import secure_filename
-import cv2 
+# import cv2 
 from ImageQuadtree import Quadtree
 from PIL import Image
-import shutil
+# import shutil
 
 app = Flask(__name__)
 upload_pth = "website.v2/upload"
@@ -61,6 +61,7 @@ def processed_images():
         for words_image_path in words_images_path:
             word_image = Image.open("website.v2/temporary/"+words_image_path)
             filename = words_image_path
+            # print(filename)
             word_image.save(os.path.join(upload_pth, filename))
             os.remove("website.v2/temporary/"+words_image_path)
             
