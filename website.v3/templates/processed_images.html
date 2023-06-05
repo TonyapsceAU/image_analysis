@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processed Images</title>
+    <style>
+        img {
+            width: 50%;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    
+    {% for image in OGimages %}
+        <img src="{{ image.url }}" alt="Image">>
+    {% endfor %}
+</body>
+</html>
