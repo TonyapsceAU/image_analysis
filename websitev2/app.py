@@ -1,73 +1,48 @@
-from flask import Flask, render_template, request, redirect, url_for
-import urllib.request
-import os
-from werkzeug.utils import secure_filename
-import cv2 
-from ImageQuadtree import Quadtree
 from PIL import Image
-import shutil
+import os
+from _keras import check_img_for_word 
 
-app = Flask(__name__)
-app.secret_key = "mnpw2123"
-app.config['UPLOAD_FOLDER'] = 'static/upload'  # Folder to store uploaded images
-        
-def clear_folder(folder_path):
-    for filename in os.listdir(folder_path):
-        file_path = os.path.join(folder_path, filename)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-        
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/upload', methods=['POST'])
-def upload():
-    folder = request.files.getlist('image_folder')  # Get the uploaded files
-
+class Quadtree:
+    def __init__(self):
+        self.images = []
     
-    # Create a directory to store the uploaded images
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
-    # clear_folder(app.config['UPLOAD_FOLDER'])
-        
-    if not os.path.exists("temporary"):
-        # shutil.rmtree("temporary")
-        os.makedirs("temporary")
-    
-    
-    # Save the uploaded images to the server
-    for file in folder:
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-    return redirect(url_for('processed_images'))
-
-
-
-@app.route('/processed_images')
-def processed_images():
-    # Get the list of processed images in the 'uploads' folder
-    origenal_images = os.listdir(app.config['UPLOAD_FOLDER'])
-
-    for image_name in origenal_images:
-        image_quadtree = Quadtree()
-        image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
-        image = Image.open(image_path)
-    
-        image_quadtree.check_img("temporary/"+image_name.split('.')[0]+"_",image)
-        words_images_path = image_quadtree.get_images()
-        
-        for words_image_path in words_images_path:
-            word_image = Image.open("temporary/"+words_image_path)
-            filename = words_image_path
-            word_image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            os.remove("temporary/"+words_image_path)
+    def check_img(self, path, image):
+        w = image.width
+        h = image.height
+        lengh = 50
+        image.save(path + ".jpg")
+        Stack = [path]
+        while Stack:
+            current_path = Stack.pop()
+            current_image = Image.open(current_path+".jpg")
+            w, h = current_image.size
             
-    # return render_template('myconsole.html', info=words_images_path)
-    return render_template('processed_images.html', OGimages=origenal_images)
+            if check_img_for_word(current_image) > 0.5 or w <= lengh or h <= lengh:
+                self.images.append(current_path[len("temporary/"):]+".jpg") 
+            else:
+                devided_images = self.subdivide(current_image)
+                for i in range(0,len(devided_images)):
+                    newimg_path = (current_path + str(i) + "_")
+                    devided_images[i].save(newimg_path + ".jpg")
+                    Stack.append(newimg_path)
+                    
+                os.remove(current_path+".jpg")
+        
+            
+
+    def subdivide(self,image):
+        w, h = image.size
+        
+        new_images = []
+        new_images.append(image.crop((w/2, 0,w,h/2)))
+        new_images.append(image.crop((0, 0, w/2, h/2)))
+        new_images.append(image.crop((w/2, h/2, w, h)))
+        new_images.append(image.crop((0, h/2, w/2,h)))
+        
+        return new_images
+    
+    def get_images(self):
+        return self.images
 
 
-if __name__ == '__main__':
-    app.run()
+    
