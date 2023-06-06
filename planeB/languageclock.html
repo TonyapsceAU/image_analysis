@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        lis1 = ['eng','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
+        lis2 = ['中','一','二','三','四','五','六','七','八','九','十','十一','十二'];
+        lis3 = ['Türkiye','bir', 'iki', 'üç', 'dört', 'beş', 'altı', 'yedi', 'sekiz', 'dokuz', 'on', 'onbir', 'on iki'];
+        lis4 = ['日本語','いち ','に','さん','し','ご','ろく','しち','はち','きゅう','じゅう','じゅういち',' じゅうに'];
+        lis5 = ['Esperanto','unu', 'du', 'tri', 'kvar', 'kvin', 'ses', 'sep', 'ok', 'naŭ', 'dek', 'dek unu', 'dek du'];
+        lis6 = ['français','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze'];
+        lis7 = ['Latinus','Unum','duo','tres','quattuor','quinque','sex','septem','octo','novem','decem','undecim','duodecim'];
+        lis8 = ['Ελληνικά','ένα','δύο','τρία','τέσσερα','πέντε','έξι','επτά','οκτώ','εννέα','δέκα','έντεκα','δώδεκα'];
+        lis9 = ['español','uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce'];
+        lis10 = ['हिंदुस्तानी','एक', 'दो', 'तीन', 'चार', 'पांच', 'छः', 'सात', 'आठ', 'नौ', 'दस', 'ग्यारह', 'बारह'];
+        lis11 = ['Indonesia','satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan','sepuluh','sebelas','dua belas'];
+        lis12 = ['русский','один','два','три','четыре','пять','шесть','семь','восемь','девять','десять','одиннадцать','двенадцать'];
+        lis13 = ['عربي','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عش'];
+        lis14 = ['ไทย','หนึ่ง','สอง','สาม','สี่','ห้า','หก','เจ็ด','แปด','เก้า','สิบ','สิบเอ็ด','สิบสอง'];
+        lis15 = ['한문','하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '열', '열한', '열두'];
+        lis16 = ['Deutsch','eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn','elf','zwölf'];
+        lis17 = ['Tiếng Việt','một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín', 'mười', 'mười một', 'mười hai'];
+        lis18 = ['Schweiziska','en', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'];
+        lis19 = ['roman numerals','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+        lis20 = ['number','1','2','3','4','5','6','7','8','9','10','11','12'];
+        
+        
+        
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background(0);
+            
+            
+            cr = 100;
+            sr = 200;
+            mr = sr *0.75;
+            hr = mr * 0.5;
+            
+            ps = 1000;
+            k = int(random(0,3));
+            olis = [];
+            
+            
+            stroke(255);
+            textSize(20);
+            fill(255);
+            textAlign(CENTER,CENTER);
+            tlis = [lis1,lis2,lis3,lis4,lis5,lis6,lis7,lis8,lis9,lis10,lis11,lis12,lis13,lis14,lis15,lis16,lis17,lis18,lis19,lis20];
+        }
+        
+        function draw() {
+            background(0);
+            translate(width / 2, height / 2);
+            clock();
+            
+            
+            for(i=1;i<13;i++){
+                an = radians(-90+i*360/12);
+                x = sr*1.25*cos(an);
+                y = sr*1.25*sin(an);
+                // o = olis[i];
+                Li = tlis[k];
+                text(Li[i],x,y);		
+            }
+            text(Li[0],0,0);
+            
+            
+        }
+        
+        
+        function clock(){
+            h = hour();
+            m = minute();
+            s = second();
+            
+            
+            if(ps!=s){
+                k = int(random(0,tlis.length));
+            }
+            ps = s
+            
+            strokeWeight(8);
+            an = radians(-90 + 360/12 * h);
+            hx = hr * cos(an);
+            hy = hr * sin(an);
+            line(cr * cos(an),cr * sin(an),hx,hy);
+            
+            strokeWeight(5);
+            an = radians(-90 + 360/60 * m);
+            mx = mr * cos(an);
+            my = mr * sin(an);
+            line(cr * cos(an),cr * sin(an),mx,my);
+            
+            
+            strokeWeight(1);
+            an = radians(-90 + 360/60 * s);
+            sx = sr * cos(an);
+            sy = sr * sin(an);
+            line(cr * cos(an),cr * sin(an),sx,sy);
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

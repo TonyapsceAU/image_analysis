@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var fireworks = [];
+        var gravity;
+        function Particle(x, y, hu, firework) {
+            this.pos = createVector(x, y);
+            this.firework = firework;
+            this.lifespan = 255;
+            this.hu = hu;
+            this.acc = createVector(0, 0);
+          
+            if (this.firework) {
+              this.vel = createVector(0, random(-16, -11));
+            } else {
+              this.vel = p5.Vector.random2D();
+              this.vel.mult(random(2, 10));
+            }
+          
+            this.applyForce = function(force) {
+              this.acc.add(force);
+            };
+          
+            this.update = function() {
+              if (!this.firework) {
+                this.vel.mult(0.9);
+                this.lifespan -= 4;
+              }
+          
+              this.vel.add(this.acc);
+              this.pos.add(this.vel);
+              this.acc.mult(0);
+            };
+          
+            this.done = function() {
+              if (this.lifespan < 0) {
+                return true;
+              } else {
+                return false;
+              }
+            };
+          
+            this.show = function() {
+              colorMode(HSB);
+          
+              if (!this.firework) {
+                strokeWeight(2);
+                stroke(hu, 255, 255, this.lifespan);
+              } else {
+                strokeWeight(4);
+                stroke(hu, 255, 255);
+              }
+          
+              point(this.pos.x, this.pos.y);
+            }
+          }
+          function Firework() {
+            this.hu = random(255);
+            this.firework = new Particle(random(width), height, this.hu, true);
+            this.exploded = false;
+            this.particles = [];
+          
+            this.done = function() {
+              if (this.exploded && this.particles.length === 0) {
+                return true;
+              } else {
+                return false;
+              }
+            };
+          
+            this.update = function() {
+              if (!this.exploded) {
+                this.firework.applyForce(gravity);
+                this.firework.update();
+          
+                if (this.firework.vel.y >= 0) {
+                  this.exploded = true;
+                  this.explode();
+                }
+              }
+          
+              for (var i = this.particles.length - 1; i >= 0; i--) {
+                this.particles[i].applyForce(gravity);
+                this.particles[i].update();
+          
+                if (this.particles[i].done()) {
+                  this.particles.splice(i, 1);
+                }
+              }
+            };
+          
+            this.explode = function() {
+              for (var i = 0; i < 100; i++) {
+                var p = new Particle(
+                  this.firework.pos.x,
+                  this.firework.pos.y,
+                  this.hu,
+                  false
+                );
+                this.particles.push(p);
+              }
+            };
+          
+            this.show = function() {
+              if (!this.exploded) {
+                this.firework.show();
+              }
+          
+              for (var i = 0; i < this.particles.length; i++) {
+                this.particles[i].show();
+              }
+            }
+          }
+        function setup() {
+          createCanvas(windowWidth, windowHeight);
+          colorMode(HSB);
+          gravity = createVector(0, 0.2);
+          stroke(255);
+          strokeWeight(4);
+          background(0);
+            
+            count = 0;
+            
+            
+            
+            
+            // t = 200;  
+            // c = 0
+            // target = 5   
+            // c2 = 0
+            // c3 = 0 
+        }
+        
+        function draw() {
+          colorMode(RGB);
+          background(0, 0, 0, 25);
+            
+            // if (c == t){
+            //   exit();
+            // }else{
+            // 	c2 = c2 + 1;
+            // c = c + 1;
+            // if (c2 == target){
+            // 		c3 = c3 + 1;
+            // saveFrames("output/gif-"+nf(c3,4)+".png");
+            // c2 = 0;
+            // 	}
+            // }
+            
+            
+          if (random(1) < 0.04) {
+            fireworks.push(new Firework());
+          }
+        
+          for (var i = fireworks.length - 1; i >= 0; i--) {
+            fireworks[i].update();
+            fireworks[i].show();
+        
+            if (fireworks[i].done()) {
+              fireworks.splice(i, 1);
+            }
+          }
+            
+        
+                
+            // count +=1;
+            // print(count);
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+          var pages = [
+          "bear.html",
+          "cow.html",
+          "dear.html",
+          "mouse.html",
+          "pendulum.html",
+          "tiger.html",
+          "elephant.html",
+          "watermelon.html",
+          "cherry.html",
+          "pineapple.html",
+          "peach.html",
+          "strawberry.html",
+          "fibonacci_spiral.html",
+          "multi_swing.html",
+          "fractal_tree.html",
+          "idk1.html",
+          "idk2.html",
+          "3dhtmlblock.html",
+          "hsbcolorblock.html",
+          "chinesecolock.html",
+          "firework.html",
+          "Regularpolygonpath.html",
+          "idk3.html",
+          "idk4.html",
+          "idk5.html",
+          "idk6.html",,
+          "idk7.html",
+          "matrix.html",
+          "languageclock.html",
+          "diceclock.html",
+          "physic.html",
+          "flowers.html",
+          "CubeWave.html",
+          "simpleterrain.html",
+          "sort1.html",
+          "sort2.html",
+          "sort3.html",
+          "sort4.html",
+          "sort5.html",
+          "sort6.html",
+          "pixelanime.html"
+          ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

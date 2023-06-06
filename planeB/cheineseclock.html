@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        time_name = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+current = 0;
+
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	background(0);
+}
+
+function draw() {
+	background(0);
+	translate(width/2,height/2);
+	stroke(255);
+	noFill();
+	ellipse(0,0,400,400)
+	
+	
+	
+	// 時辰分隔线
+	for(let i = 0 ; i < 12 ; i ++ ){
+		x = 200 * cos(radians(15+30*i))
+		y = 200 * sin(radians(15+30*i))
+		line(0,0,x,y);
+	}
+	
+	// 小時分隔线
+	for(let i = 0 ; i < 36 ; i ++ ){
+		x = 200 * cos(radians(5+10*i))
+		y = 200 * sin(radians(5+10*i))
+		a = 180 * cos(radians(5+10*i))
+		b = 180 * sin(radians(5+10*i))
+		line(a,b,x,y);
+	}
+	
+	
+	// 時辰
+	for(let i = 0 ; i < 12 ; i ++ ){
+		x = 130 * cos(radians(-90+30*i))
+		y = 130 * sin(radians(-90+30*i))
+		stroke(255,50);
+		textSize(30);
+		if (i == current){
+			stroke(255,255);
+		}else{
+			stroke(255,100);
+		}
+		
+		text(time_name[i],x-15,y+10);
+	}
+	
+
+	checktime();
+	
+	mn = minute();
+	fill(255,100)
+	x = 190 * cos(radians(-95 + 360/24 * hr + mn*(10/60)));
+	y = 190 * sin(radians(-95 + 360/24 * hr + mn*(10/60)));
+	ellipse(x,y,10,10);
+
+	for(let i = 0 ; i < 24 ; i ++ ){
+		x = 220 * cos(radians(-90+15*i)) - 15;
+		y = 220 * sin(radians(-90+15*i)) + 10;
+		text(i,x,y);
+	}
+	
+}
+
+function checktime(){
+	hr = hour();
+		if (hr == 1 || hr == 2 ) {
+			current = 1;
+	}
+		if (hr == 3 || hr == 4 ) {
+			current = 2;
+	}
+		if (hr == 5 || hr == 6 ) {
+			current = 3;
+	}
+		if (hr == 7 || hr == 8 ) {
+			current = 4;
+	}
+		if (hr == 9 || hr == 10 ) {
+			current = 5;
+	}
+		if (hr == 11 || hr == 12 ) {
+			current = 6;
+	}
+		if (hr == 13 || hr == 14 ) {
+			current = 7;
+	}
+		if (hr == 15 || hr == 16 ) {
+			current = 8;
+	}
+		if (hr == 17 || hr == 18 ) {
+			current = 9;
+	}
+		if (hr == 19 || hr == 20 ) {
+			current = 10;
+	}
+		if (hr == 21 || hr == 22 ) {
+			current = 11;
+	}
+		if (hr == 23 || hr == 24 ) {
+			current = 12;
+	}
+
+	// textSize(30);
+	// text(hr + '時',300,0);
+	
+}
+
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

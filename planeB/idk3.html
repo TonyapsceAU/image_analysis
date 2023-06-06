@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+        class Arc{
+
+            constructor(cen_x, cen_y , dis , w  , r ,g, b,alp,Fill , split_num,gap_ang,ang) {
+                this.cen_x = cen_x ;
+                this.cen_y = cen_x ;
+                this.d = dis;
+                this.w = w;
+                this.r = r;
+                this.g = g;
+                this.b = b;
+                this.alp = alp;
+                this.Fi = Fill;
+                this.split_num = split_num;
+                this.gap_ang = gap_ang;
+                this.ang = -90;
+            }
+            
+            show(ang){
+                this.ang = ang;
+                stroke(this.r,this.g,this.b,this.alp);
+                strokeWeight(this.w);
+                if(this.Fi==1){
+                    fill(this.r,this.g,this.b,this.alp)
+                }else{
+                    noFill();
+                }
+                
+                for(let i=0;i<this.split_num;i++){
+                    this.sang = this.ang    +    this.gap_ang/2     +  i*(360/this.split_num);
+                    this.eang = this.ang    +  (i+1)*(360/this.split_num)  -  (this.gap_ang/2);
+                    arc(this.cen_x, this.cen_y, this.d, this.d, radians(this.sang),radians(this.eang));
+                }
+            }
+        }
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background(38,77,88);
+            translate(width/2,height/2);
+            
+            
+            ang = 0;
+            pi1_setup();
+            
+        }
+        
+        
+        
+        
+        
+        function draw() {
+            background(38,77,88);
+            translate(width/2,height/2);
+            
+            
+            draw1(15,150,24,ang);
+            
+            ang +=1;
+            //noLoop();
+            
+            strokeWeight(20);
+            stroke(38,77,88);
+            ellipse(0, 0, 175, 175);
+            
+            
+            strokeWeight(2);
+            stroke(244,244,244);
+            r = 85;
+            a = 360/50;
+            for(j=0;j<50;j++){
+                an = radians(ang+a*j)
+                x = (r) * cos(an);
+                y = (r) * sin(an);
+                X = (r*1.05) * cos(an);
+                Y = (r*1.05) * sin(an);
+                line(x,y,X,Y);
+            }
+        }
+        
+        
+        
+        function pi1_setup() {
+            arc1 = new Arc(0, 0 , 550 ,5   ,244,203,150,255,0 ,60 ,3     , 0);
+            arc2 = new Arc(0, 0 , 480 ,5   ,244,203,150,255,0 ,15 ,5     , 0);
+        }
+        
+        
+        
+        
+        function draw1(amount,r,a,ang) {
+            strokeWeight(2);
+            stroke(244,203,150);
+            noFill();
+            for(j=0;j<3;j++){
+                for(i=0;i<amount;i++){
+                    x = (r-50*j) * cos(radians(ang+a*i));
+                    y = (r-50*j) * sin(radians(ang+a*i));
+                    ellipse(x,y, 100, 100);
+                }
+            }
+            
+            
+            strokeWeight(15);
+            stroke(244,244,244,230);
+            ellipse(0, 0, 390, 390);
+            
+            strokeWeight(5);
+            stroke(244,203,150);
+            ellipse(0, 0, 375, 375);
+            ellipse(0, 0, 400, 400);
+            
+            strokeWeight(2);
+            stroke(244,203,150);
+            ellipse(0, 0, 420, 420);
+            
+            strokeWeight(6);
+            ellipse(0,0,540,540);
+            ellipse(0,0,560,560);
+            arc1.show(ang);
+            
+            stroke(244,203,150);
+            strokeWeight(3);
+            for(i=0;i<amount;i++){
+                x = 240 * cos(radians(ang+a*i));
+                y = 240 * sin(radians(ang+a*i));
+                ellipse(x,y, 20, 20);
+            }
+            
+            strokeWeight(2);
+            stroke(244,203,150);
+            ellipse(0, 0, 520, 520);
+            
+            arc2.show(ang);
+            
+            strokeWeight(5);
+            stroke(244,244,244,230);
+            ellipse(0, 0, 200, 200);
+            ellipse(0, 0, 150, 150);
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

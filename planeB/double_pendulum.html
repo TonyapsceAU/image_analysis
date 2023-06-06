@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Double Pendulum</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+
+<body>
+  <script>
+    // Your p5.js program here
+    let r1 = 100;
+    let r2 = 100;
+    let m1 = 20;
+    let m2 = 20;
+    let a1 = 20;
+    let a2 = 10 + random(0, 1);
+    let a1_v = 0.00;
+    let a2_v = 0.00;
+    let a1_a = 0.01;
+    let a2_a = -0.01;
+
+    let x1 = 300;
+    let x2 = 300;
+    let y1 = 100;
+    let y2 = 100;
+
+    let g = 1;
+
+    let num1 = 0;
+    let num2 = 0;
+    let num3 = 0;
+    let num4 = 0;
+    let den = 0;
+
+    let chaios = 0.001;
+
+    let d1x = 0;
+    let d1y = 0;
+
+    function setup() {
+      createCanvas(800, 500);
+      
+      background(255, 255, 255, 255);
+      frameRate(60);
+      pg = createGraphics(800, 500);
+      pg.background(0);
+    }
+
+    function draw() {
+      background(255, 255, 255, 255);
+      image(pg, 0, 0);
+
+      d1y = y2;
+      d1x = x2;
+
+      num1 = -g * (2 * m1 + m2) * sin(a1);
+      num2 = -m2 * g * sin(a1 - 2 * a2);
+      num3 = -2 * sin(a1 - a2) * m2;
+      num4 = a2_v * a2_v * r2 + a1_v * a1_v * r1 * cos(a1 - a2);
+      den = r1 * (2 * m1 + m2 - m2 * cos(2 * a1 - 2 * a2));
+
+      a1_a = (num1 + num2 + num3 * num4) / den;
+
+      num1 = 2 * sin(a1 - a2);
+      num2 = (a1_v * a1_v * r1 * (m1 + m2));
+      num3 = g * (m1 + m2) * cos(a1);
+      num4 = a2_v * a2_v * r2 * m2 * cos(a1 - a2);
+      den = r2 * 2 * (m1 + m2 - m2 * cos(2 * a1 - 2 * a2));
+
+      a2_a = (num1 * (num2 + num3 + num4)) / den + chaios;
+
+      x1 = r1 * sin(a1);
+      y1 = r1 * cos(a1);
+
+      x2 = width / 2 + x1 + r2 * sin(a2);
+      y2 = height / 5 + y1 + r2 * cos(a2);
+
+      fill(230, 230, 255, 180 + frameCount * 0.001);
+      stroke(230, 230, 255, 180 + frameCount * 0.001);
+      ellipse(width / 2, height / 5, 40, 40);
+
+      line(width / 2, height / 5, width / 2 + x1, height / 5 + y1);
+      line(width / 2 + 1, height / 5, width / 2 + x1 + 1, height / 5 + y1);
+      line(width / 2 + 2, height / 5, width / 2 + x1 + 2, height / 5 + y1);
+      line(width / 2 - 1, height / 5, width / 2 + x1 - 1, height / 5 + y1);
+      line(width / 2 - 2, height / 5, width / 2 + x1 - 2, height / 5 + y1);
+      ellipse(width / 2 + x1, height / 5 + y1, m1, m1);
+
+      line(width / 2 + x1, height / 5 + y1, x2, y2);
+      line(width / 2 + x1 + 1, height / 5 + y1, x2 + 1, y2);
+      line(width / 2 + x1 + 2, height / 5 + y1, x2 + 2, y2);
+      line(width / 2 + x1 - 1, height / 5 + y1, x2 - 1, y2);
+      line(width / 2 + x1 - 2, height / 5 + y1, x2 - 2, y2);
+      ellipse(x2, y2, m2, m2);
+
+      a1_v = a1_v + a1_a;
+      a2_v = a2_v + a2_a;
+      a1 = a1 + a1_v;
+      a2 = a2 + a2_v;
+
+      pg.line(d1x, d1y, x2, y2);
+      pg.stroke(230, 230, 255, 180 + frameCount * 0.001);
+    }
+  </script>
+  <script>
+    function redirectToRandomPage() {
+      var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+        var randomIndex = Math.floor(Math.random() * pages.length);
+        window.location.href = pages[randomIndex];
+    }
+    document.addEventListener("keydown", redirectToRandomPage);
+    document.addEventListener("click", redirectToRandomPage);
+</script>
+</body>
+
+</html>

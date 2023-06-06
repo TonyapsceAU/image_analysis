@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        a = 0;
+r = 200;
+Saturation = 255;
+bright = 55;
+count = 0;
+b = 0;
+
+function setup() {
+	createCanvas(windowWidth, windowHeight,WEBGL);
+	colorMode(HSB);
+	background(0,0,255);
+}
+
+function draw() {
+	
+	// translate(width/2,height/2);
+  background(0,0,255);
+  rotateY(b);
+  rotateZ(b);
+	b += 0.01;
+    
+  a = 0;
+	r = 200;
+  Saturation = 255;
+	bright = 55;
+  count = 0;
+    
+	for(i=0;i<600;i++){
+		x = r * cos(radians(a));
+		y = r * sin(radians(a));
+			
+		Hue = a;
+    fill(Hue,Saturation,bright);
+		stroke(255);
+		// noStroke();
+		translate(x,y,bright);
+		box(30);
+		translate(-1*x,-1*y,-1*bright);
+			
+		if (a < 360){
+			a += 15;
+		}else{
+			r -= 40;
+			Saturation -= 40;
+			a = 15;			
+		}
+                        
+    
+		if (r <= 0){
+			r = 200;
+			Saturation = 255;
+			// bright += 40;
+			bright += 35;
+		}
+                
+        
+    
+		count += 1;
+		if (bright >= 255){
+			break;
+		}
+	}        
+}
+
+    
+    
+    </script>
+    <script>
+        function redirectToRandomPage() {
+          var pages = [
+          "bear.html",
+          "cow.html",
+          "dear.html",
+          "mouse.html",
+          "pendulum.html",
+          "tiger.html",
+          "elephant.html",
+          "watermelon.html",
+          "cherry.html",
+          "pineapple.html",
+          "peach.html",
+          "strawberry.html",
+          "fibonacci_spiral.html",
+          "multi_swing.html",
+          "fractal_tree.html",
+          "idk1.html",
+          "idk2.html",
+          "3dhtmlblock.html",
+          "hsbcolorblock.html",
+          "chinesecolock.html",
+          "firework.html",
+          "Regularpolygonpath.html",
+          "idk3.html",
+          "idk4.html",
+          "idk5.html",
+          "idk6.html",,
+          "idk7.html",
+          "matrix.html",
+          "languageclock.html",
+          "diceclock.html",
+          "physic.html",
+          "flowers.html",
+          "CubeWave.html",
+          "simpleterrain.html",
+          "sort1.html",
+          "sort2.html",
+          "sort3.html",
+          "sort4.html",
+          "sort5.html",
+          "sort6.html",
+          "pixelanime.html"
+          ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

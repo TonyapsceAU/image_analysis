@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    function redirectToRandomPage() {
+      var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+        var randomIndex = Math.floor(Math.random() * pages.length);
+        window.location.href = pages[randomIndex];
+    }
+    document.addEventListener("keydown", redirectToRandomPage);
+    document.addEventListener("click", redirectToRandomPage);
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+
+  <script>
+    function setup() {
+      createCanvas(400, 400);
+      background(255);
+    }
+
+    function draw() {
+      // twig outline
+      stroke(0);
+      strokeWeight(4);
+      line(200, 150, 200, 120);
+      line(200, 150, 180, 200);
+      line(200, 150, 220, 200);
+      line(190, 120, 210, 120);
+
+      // twig
+      stroke(128, 255, 0);
+      strokeWeight(2);
+      line(200, 150, 200, 120);
+      line(200, 150, 180, 200);
+      line(200, 150, 220, 200);
+      stroke(100, 55, 0);
+      line(190, 120, 210, 120);
+
+      // grapse
+      stroke(0);
+      strokeWeight(2);
+      fill(200, 0, 50);
+      rect(165, 195, 30, 30);
+      rect(205, 195, 30, 30);
+    }
+
+    setup();
+    draw();
+  </script>
+</body>
+</html>

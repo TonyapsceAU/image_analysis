@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        class Shape{
+
+            constructor(cen_x, cen_y , dis , R , w ,ang , r ,g, b,alp,Fill , num) {
+                this.cen_x = cen_x  + dis * cos(radians(ang-90));
+                this.cen_y = cen_x  + dis * sin(radians(ang-90));
+                this.d = dis;
+                this.R = R;
+                this.w = w;
+                this.ang = ang;
+                this.r = r;
+                this.g = g;
+                this.b = b;
+                this.alp = alp;
+                this.num = num;
+                this.Fi = Fill;
+            }
+            
+            // Rotate(a){
+            // 	this.cen_x = 0 + this.d * cos(radians(a-90));
+            // 	this.cen_y = 0 + this.d * sin(radians(a-90));
+            // }
+            
+            show(ang,a){
+                this.ang = ang;
+                this.offset = 360/this.num;
+                
+                stroke(this.r,this.g,this.b,this.alp);
+                strokeWeight(this.w);
+                if(this.Fi==1){
+                    fill(38, 77, 88,this.alp)
+                }else{
+                    noFill();
+                }
+                // this.ang += i*this.offset
+                
+                this.cen_x = 0 + this.d * cos(radians(a-90));
+                this.cen_y = 0 + this.d * sin(radians(a-90));
+                
+                
+                beginShape();
+                for (let j = 0; j < this.num; j++) {
+                    
+                    let x = this.cen_x + (this.R) * cos(radians(this.ang+this.offset*j));
+                    let y = this.cen_y + (this.R) * sin(radians(this.ang+this.offset*j));
+                    vertex(x,y);
+                }
+                endShape(CLOSE);
+            }
+        }
+        class Arc{
+
+            constructor(cen_x, cen_y , dis , w  , r ,g, b,alp,Fill , split_num,gap_ang,ang) {
+                this.cen_x = cen_x ;
+                this.cen_y = cen_x ;
+                this.d = dis;
+                this.w = w;
+                this.r = r;
+                this.g = g;
+                this.b = b;
+                this.alp = alp;
+                this.Fi = Fill;
+                this.split_num = split_num;
+                this.gap_ang = gap_ang;
+                this.ang = -90;
+            }
+            
+            show(ang){
+                this.ang = ang;
+                stroke(this.r,this.g,this.b,this.alp);
+                strokeWeight(this.w);
+                if(this.Fi==1){
+                    fill(this.r,this.g,this.b,this.alp)
+                }else{
+                    noFill();
+                }
+                
+                for(let i=0;i<this.split_num;i++){
+                    this.sang = this.ang    +    this.gap_ang/2     +  i*(360/this.split_num);
+                    this.eang = this.ang    +  (i+1)*(360/this.split_num)  -  (this.gap_ang/2);
+                    arc(this.cen_x, this.cen_y, this.d, this.d, radians(this.sang),radians(this.eang));
+                }
+            }
+        }
+        class Star{
+	
+            constructor(distenc,spike_num,outer_dianmite,iner_diamite,Red,Green,Blue,Alpha,Fill,width) {
+                this.distence = distenc;
+                this.spike_num = spike_num;
+                this.offset = 360/spike_num;
+                this.outer_dianmiter = outer_dianmite;
+                this.iner_diamiter = iner_diamite;
+                this.cen_x = this.distence * cos(radians(-90));
+                this.cen_y = this.distence * sin(radians(-90));
+                this.Red = Red;
+                this.Green = Green;
+                this.Blue = Blue;
+                this.Alpha = Alpha;
+                this.Fill = Fill;
+                this.width = width;
+            }
+            
+            
+            show(rotate_ang){
+                let outer_pos = [];
+                for (let j = 0; j < this.spike_num; j++) {
+                    let an = radians(rotate_ang+this.offset*j);
+                    let x = this.cen_x + this.outer_dianmiter * cos(an);
+                    let y = this.cen_y + this.outer_dianmiter * sin(an);
+                    append(outer_pos,{x,y});
+                }
+                
+                let iner_pos = [];
+                for (let j = 0; j < this.spike_num; j++) {
+                    let an = radians(rotate_ang+this.offset*j+this.offset/2);
+                    let x = this.cen_x + this.iner_diamiter * cos(an);
+                    let y = this.cen_y + this.iner_diamiter * sin(an);
+                    append(iner_pos,{x,y});
+                }
+        
+                let point_list = [];
+                for(let i=0;i<iner_pos.length;i++){
+                    append(point_list,outer_pos[i]);
+                    append(point_list,iner_pos[i]);
+                }
+                append(point_list,outer_pos[0])
+        
+                
+                stroke(this.Red,this.Green,this.Blue,this.Alpha);
+                strokeWeight(this.width);
+                if(this.Fill==1){
+                    fill(this.Red,this.Green,this.Blue,this.Alpha)
+                }else{
+                    noFill();
+                }
+                
+                
+                beginShape();
+                for(let i=0;i<point_list.length;i++){
+                    vertex(point_list[i].x,point_list[i].y);
+                }
+                endShape(CLOSE);
+                
+                
+            }
+        
+            
+            rotate(rotate_ang){
+                let an = radians(rotate_ang-90);
+                this.cen_x = this.distence * cos(an);
+                this.cen_y = this.distence * sin(an);
+            }
+            
+            
+        }
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background(100);
+            amount = 60;
+            ang = 0;
+            star = new Star(0,4,300,150,244,203,150,255,0,2);
+            star1 = new Star(0,4,300,150,244,203,150,255,0,2);
+            
+            arc1 = new Arc(0,0, 400,2, 244,203,150,255,0,8,35, 0);
+            arc2 = new Arc(0,0, 420,2, 244,203,150,255,0,8,30, 0);
+            
+            lis = [];
+            amount =8;
+            for(i=0;i<amount;i++){
+                shape1 = new Shape(0, 0 , 240 ,35 , 2 ,0 , 244,203,150,255, 1 , 3);
+                append(lis,shape1);
+            }
+            
+            
+            
+        }
+        
+        function draw() {
+            translate(width/2,height/2);
+            // rotate(ang);
+            background(38, 77, 88);
+            
+        
+            noFill();
+            stroke(200,150);
+            k = 10;
+            for(i=0;i<360/k;i++){
+                angle1 = radians(ang+k*i)
+                rotate(angle1);
+                ellipse(0,0, 250, 30);
+                rotate(-1*angle1);
+            }
+            
+            strokeWeight(3);
+            stroke(244,203,150);
+            ellipse(0, 0, 240);
+            ellipse(0, 0, 250);
+            ellipse(0, 0, 270);
+            ellipse(0, 0, 290);
+            ellipse(0, 0, 600);
+            
+            strokeWeight(2);
+            stroke(244,244,244,230);
+            amount = 120;
+            a = 360/amount;
+            r = 130;
+            for(j=0;j<amount;j++){
+                x = (r) * cos(radians(ang+a*j));
+                y = (r) * sin(radians(ang+a*j));
+                X = (r*1.01) * cos(radians(ang+a*j));
+                Y = (r*1.01) * sin(radians(ang+a*j));
+                line(x,y,X,Y);
+            }
+            
+            strokeWeight(2);
+            stroke(244,203,150);
+            amount = 50;
+            a = 360/amount;
+            r = 135;
+            for(j=0;j<amount;j++){
+                x = (r) * cos(radians(ang+a*j));
+                y = (r) * sin(radians(ang+a*j));
+                X = (r*1.05) * cos(radians(ang+a*j));
+                Y = (r*1.05) * sin(radians(ang+a*j));
+                line(x,y,X,Y);
+            }
+            
+            
+            star.show(ang);
+            star1.show(ang+45);
+            
+            amount = 8;
+            a = 360/amount;
+            r = 160;
+            for(j=0;j<amount;j++){
+                x = (r) * cos(radians(ang+a*j));
+                y = (r) * sin(radians(ang+a*j));
+                X = (r) * cos(radians(ang+a*(j+1)));
+                Y = (r) * sin(radians(ang+a*(j+1)));
+                line(x,y,X,Y);
+            }
+            
+            strokeWeight(3);
+            stroke(244);
+            ellipse(0, 0, 410);
+            
+            arc1.show(ang);
+            arc2.show(ang);
+            
+            for (i = 0; i <8 ; i++) {
+                lis[i].show(30+45*i,45*i);
+            }
+            
+            strokeWeight(4);
+            stroke(244);
+            r = 240;
+            for (i = 0; i <8 ; i++) {
+                an = radians(45/2+ ang+45*i)
+                x = (r) * cos(an);
+                y = (r) * sin(an);
+                ellipse(x,y,20);
+            }
+        
+            
+            strokeWeight(2);
+            stroke(244,203,150);
+            amount = 60;
+            a = 360/amount;
+            r = 280;
+            for(j=0;j<amount;j++){
+                x = (r) * cos(radians(ang+a*j));
+                y = (r) * sin(radians(ang+a*j));
+                X = (r*1.05) * cos(radians(ang+a*j));
+                Y = (r*1.05) * sin(radians(ang+a*j));
+                line(x,y,X,Y);
+            }
+            
+            
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+                        ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>
