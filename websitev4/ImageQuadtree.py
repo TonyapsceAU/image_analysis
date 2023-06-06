@@ -2,8 +2,8 @@ from PIL import Image
 import os
 import math
 import random
-from tfJS_Selenium_def import tfJS
-# from _keras import check_img_for_word
+# from tfJS_Selenium_def import tfJS
+from _keras import check_img_for_word
 
 class Quadtree:
     def __init__(self):
@@ -14,6 +14,8 @@ class Quadtree:
         w = image.width
         h = image.height
         lengh = 75
+        if image.format == "PNG":
+            image = image.convert("RGB")
         image.save(path + ".jpg")
         stack = [path]
         
@@ -24,15 +26,16 @@ class Quadtree:
         x,  y = 0, 0
         while stack:
             current_path = stack.pop()
+            # print(current_path)
             current_image = Image.open(current_path+".jpg")
             w, h = current_image.size
             # if  tfJS(current_path+".jpg")> 0.5 or w <= lengh or h <= lengh:
             if check_img_for_word(current_path+".jpg") > 0.5 or w <= lengh or h <= lengh:
-                self.images.append(current_path[len("temporary/"):]+".jpg") 
+                self.images.append(current_path[len("websitev4/temporary/"):]+".jpg") 
             else:
                 devided_images = self.subdivide(current_image,x,y)
                 for j in range(0,len(devided_images)):
-                    x, y = devided_images[j][1], devided_images[j][2]
+                    x, y = int(devided_images[j][1]), int(devided_images[j][2])
                     pure_name = current_path.split('_')[1].split('-')[0]
                     newimg_path = current_path.split('_')[0] +"_"+ str(self.naming(s,int(pure_name),j))+"-("+str(x)+","+str(y)+")"
                     devided_images[j][0].save(newimg_path + ".jpg")
@@ -80,10 +83,10 @@ class Quadtree:
         if i == 3: return a + w + 1
 
 
-def check_img_for_word(img):
-    # return 0
-    return round(random.random(),1)
+# def check_img_for_word(img):
+#     return 0
+#     return round(random.random(),1)
 
 # tree = Quadtree()
-# image = Image.open("IMG.jpg")
-# tree.check_img("temporary/"+"IMG"+"_0", image)
+# image = Image.open("websitev4/003.png")
+# tree.check_img("websitev4/temporary/" + "003"+"_0", image)

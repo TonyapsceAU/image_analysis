@@ -4,8 +4,8 @@ from PIL import Image, ImageOps
 import numpy as np
 
 np.set_printoptions(suppress=True)
-model = tensorflow.keras.models.load_model("keras_Model.h5", compile=False)
-class_names = open("labels.txt", "r").readlines()
+model = tensorflow.keras.models.load_model("websitev4/keras_Model.h5", compile=False)
+class_names = open("websitev4/labels.txt", "r").readlines()
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 size = (224, 224)
 
