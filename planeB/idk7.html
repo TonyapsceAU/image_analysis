@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight,WEBGL);
+            background(0);
+            ang = 0;
+            x = 0;
+            y = 0;
+            speed = 1;
+        }
+        
+        function draw() {
+            background(0);
+            // rotateX(radians(90));
+            
+            translate(x,y,0);
+            rotateY(radians(ang));
+            rotateX(radians(90));
+            
+            for(i=-50;i<50;i++){
+                translate(0,0,i*4);
+                s = 100 + sin(radians(i*10 +ang)) * 50;
+                rect(-s/2,-s/2,s);
+                translate(0,0,-i*4);
+                i++;
+            }
+            
+            rotateX(-radians(90));
+            rotateY(-radians(ang));
+            translate(-x,-y,0);
+            
+            
+            
+            translate(-x,-y,0);
+            rotateY(radians(ang));
+            rotateX(radians(90));
+            
+            for(i=-50;i<50;i++){
+                i++
+                translate(0,0,i*4);
+                s = 100 + sin(radians(i*10 +ang)) * 50;
+                rect(-s/2,-s/2,s);
+                translate(0,0,-i*4);
+            }
+            
+            
+            rotateX(-radians(90));
+            rotateY(-radians(ang));
+            translate(x,-y,0);
+            
+            
+            if(x>=width/5||x<=-width/5){
+                speed*=-1
+            }
+            x+=speed;
+            
+            ang += 2;
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+                        ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="multiSwingContainer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const MultiSwing = () => {
+          useEffect(() => {
+            const sketch = (p) => {
+              let ang = 0;
+              let x = 0;
+              let y = 0;
+              let speed = 1;
+          
+              p.setup = () => {
+                p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+                p.background(0);
+              };
+          
+              p.draw = () => {
+                p.background(0);
+          
+                p.translate(x, y, 0);
+                p.rotateY(p.radians(ang));
+                p.rotateX(p.radians(90));
+          
+                for (let i = -50; i < 50; i++) {
+                  p.translate(0, 0, i * 4);
+                  const s = 100 + p.sin(p.radians(i * 10 + ang)) * 50;
+                  p.rect(-s / 2, -s / 2, s);
+                  p.translate(0, 0, -i * 4);
+                  i++;
+                }
+          
+                p.rotateX(-p.radians(90));
+                p.rotateY(-p.radians(ang));
+                p.translate(-x, -y, 0);
+          
+                p.translate(-x, -y, 0);
+                p.rotateY(p.radians(ang));
+                p.rotateX(p.radians(90));
+          
+                for (let i = -50; i < 50; i++) {
+                  i++;
+                  p.translate(0, 0, i * 4);
+                  const s = 100 + p.sin(p.radians(i * 10 + ang)) * 50;
+                  p.rect(-s / 2, -s / 2, s);
+                  p.translate(0, 0, -i * 4);
+                }
+          
+                p.rotateX(-p.radians(90));
+                p.rotateY(-p.radians(ang));
+                p.translate(x, -y, 0);
+          
+                if (x >= p.width / 5 || x <= -p.width / 5) {
+                  speed *= -1;
+                }
+                x += speed;
+          
+                ang += 2;
+              };
+            };
+          
+            new p5(sketch);
+          }, []);
+          
+          useEffect(() => {
+            const redirectToRandomPage = () => {
+              const pages = [
+                'bear.html',
+                'cow.html',
+                'dear.html',
+                'mouse.html',
+                'pendulum.html',
+                'tiger.html',
+                'elephant.html',
+                'watermelon.html',
+                'cherry.html',
+                'pineapple.html',
+                'peach.html',
+                'strawberry.html',
+                'fibonacci_spiral.html',
+                'multi_swing.html',
+                'fractal_tree.html',
+                'idk1.html',
+                'idk2.html',
+                '3dhtmlblock.html',
+                'hsbcolorblock.html',
+                'chinesecolock.html',
+                'firework.html',
+                'Regularpolygonpath.html',
+                'idk3.html',
+                'idk4.html',
+                'idk5.html',
+                'idk6.html',
+                'idk7.html',
+                'matrix.html',
+                'languageclock.html',
+                'diceclock.html',
+                'physic.html',
+                'flowers.html',
+                'CubeWave.html',
+                'simpleterrain.html',
+                'sort1.html',
+                'sort2.html',
+                'sort3.html',
+                'sort4.html',
+                'sort5.html',
+                'sort6.html',
+                'pixelanime.html'
+              ];
+          
+              const randomIndex = Math.floor(Math.random() * pages.length);
+              window.location.href = pages[randomIndex];
+            };
+          
+            document.addEventListener('keydown', redirectToRandomPage);
+            document.addEventListener('click', redirectToRandomPage);
+          
+            return () => {
+              document.removeEventListener('keydown', redirectToRandomPage);
+              document.removeEventListener('click', redirectToRandomPage);
+            };
+          }, []);
+          
+          return <div />;
+        };
+          
+        ReactDOM.render(<MultiSwing />, document.getElementById('multiSwingContainer'));
+    </script>
+</body>
+</html> -->

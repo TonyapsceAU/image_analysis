@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        r1 = 200/3;
+r2 = 200/3*2;
+r3 = 200;
+ang1 = 0;
+ang2 = 0;
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	background(100);
+}
+
+function draw() {
+	translate(width/2,height/2);
+	background(100);
+	ang1 += 0.1;
+	ang2 -= 0.1;
+	
+	stroke(255);
+	noFill();
+	ellipse(0,0,400, 400);
+	
+	
+	
+
+	
+	for(i = 0 ; i < 90; i++){
+		ang1 += 4;
+		stroke(255);
+		a = r1 * cos(radians(ang1-50));
+		b = r1 * sin(radians(ang1-50));
+		c = r2 * cos(radians(ang1-60));
+		d = r2 * sin(radians(ang1-60));
+		e = r3 * cos(radians(ang1-90));
+		f = r3 * sin(radians(ang1-90));
+		bezier(0, 0, a, b,c, d, e, f);
+	}
+
+	for(i = 0 ; i < 90; i++){
+		ang2 += 4;
+		stroke(255);
+		a = r1 * cos(radians(ang2-130));
+		b = r1 * sin(radians(ang2-130));
+		c = r2 * cos(radians(ang2-120));
+		d = r2 * sin(radians(ang2-120));
+		e = r3 * cos(radians(ang2-90));
+		f = r3 * sin(radians(ang2-90));
+		bezier(0, 0, a, b,c, d, e, f);
+	}
+	// stroke(0,255,0);
+	// line(0,0,a,b);
+	// line(0,0,c,d);
+	// line(0,0, e,f);
+	
+}
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background(0);
+            sr = 200;
+            hr = sr * 0.5;
+            mr = hr *0.5;
+            stroke(255);
+        }
+        
+        function draw() {
+            background(0);
+            translate(width / 2, height / 2);
+            
+            for(i=0;i<12;i++){
+                an = radians(-90+i*360/12+360/12);
+                x = sr*1.25*cos(an);
+                y = sr*1.25*sin(an);
+                dice(x,y,i+1,20);
+                // ellipse(x,y,50);
+                
+            }
+            
+            
+            
+            
+            clock();
+        }
+        function dice(x,y,num,sz){
+            if(num==1){
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x,y,sz);
+            }else if(num == 2){
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+            }else if(num == 3){
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x,y,sz);
+                ellipse(x-sz,y+sz,sz);
+            }else if(num == 4){
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x+sz,y+sz,sz);
+                ellipse(x-sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+            }else if(num == 5){
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x+sz,y+sz,sz);
+                ellipse(x-sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+                ellipse(x,y,sz);
+            }else if(num == 6){
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+            }else if(num == 7){
+                translate(-sz*5,sz*5);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+                translate(sz*5,-sz*5);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x,y,sz);
+            }else if(num == 8){
+                translate(-sz*5,0);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+                translate(sz*5,0);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+            }else if(num == 9){
+                translate(-sz*5,0);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+                translate(sz*5,0);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x,y,sz);
+                ellipse(x-sz,y+sz,sz);
+            }else if(num == 10){
+                translate(-sz*5,0);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+                translate(sz*5,0);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x+sz,y+sz,sz);
+                ellipse(x-sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+            }else if(num == 11){
+                translate(-sz*5,-sz*5);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+                translate(sz*5,sz*5);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x+sz,y+sz,sz);
+                ellipse(x-sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+                ellipse(x,y,sz);
+            }else if(num == 12){
+                translate(0,-sz*5);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz*1.2,y-sz,sz);
+                ellipse(x+sz*1.2,y+sz,sz);
+                ellipse(x-sz*1.2,y-sz,sz);
+                ellipse(x-sz*1.2,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+                translate(0,sz*5);
+                noFill();
+                rect(x-sz*2.5,y-sz*2.5,sz*5,sz*5,sz);
+                fill(255);
+                ellipse(x+sz,y-sz,sz);
+                ellipse(x+sz,y+sz,sz);
+                ellipse(x-sz,y-sz,sz);
+                ellipse(x-sz,y+sz,sz);
+                ellipse(x,y-sz,sz);
+                ellipse(x,y+sz,sz);
+            }
+            
+            
+            
+        
+            
+            
+            
+            
+            
+        }
+        
+        function clock(){
+            h = hour();
+            m = minute();
+            s = second();
+            
+            strokeWeight(8);
+            an = radians(-90 + 360/12 * h);
+            hx = hr * cos(an);
+            hy = hr * sin(an);
+            line(0,0,hx,hy);
+            
+            strokeWeight(5);
+            an = radians(-90 + 360/60 * m);
+            mx = mr * cos(an);
+            my = mr * sin(an);
+            line(0,0,mx,my);
+            
+            
+            strokeWeight(1);
+            an = radians(-90 + 360/60 * s);
+            sx = sr * cos(an);
+            sy = sr * sin(an);
+            line(0,0,sx,sy);
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

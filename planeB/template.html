@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "collatz_conjecture.html",
+            "fractal_tree.html",
+            "sponge_fractal.html",
+            "fractal.html",
+            "snack_game.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+                        ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

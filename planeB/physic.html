@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        class Ball{
+            constructor(x,y){
+                this.pos = createVector(x,y);
+                this.vel = p5.Vector.random2D();
+                this.vel.mult(5);
+                this.siz = random(10,30);
+                this.R = 100+ random(0,155);
+                this.G = 100+ random(0,155);
+                this.B = 100+ random(0,155);
+            }
+            
+            wall(){
+                if((this.pos.x-this.siz*0.5<=-w/2+box_width)||(this.pos.x+this.siz*0.5>=w/2-box_width)){
+                    // let acc = p5.Vector.random2D();
+                    // this.vel.add(acc);
+                    this.vel.x*=-1;
+                    
+                }
+                if((this.pos.y-this.siz/2<=-h/2+box_width)||(this.pos.y+this.siz/2>=h/2-box_width)){
+                    // let acc = p5.Vector.random2D();
+                    // this.vel.add(acc);
+                    this.vel.y*=-1;
+                }
+                
+                // pos_cord = position_find(this.pos.x,this.pos.y);
+                // return pos_cord;
+            }
+            show(){
+                
+                this.pos.add(this.vel);
+                strokeWeight(this.siz);
+                stroke(this.R,this.G,this.B);
+                point(this.pos.x,this.pos.y);
+        
+                
+            }
+        }
+        function position_find(x,y){
+            xc=map(x,-w/2+box_width,w/2-box_width,0,w);
+            yc=map(y,-h/2+box_width,h/2-box_width,0,h);
+            add = yc*w+xc;
+            return add;
+            // print({x,y,add});
+        }
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background(100);
+            stroke(255);
+            // strokeWeight(5);
+            noFill();
+            
+            
+            h = 600;
+            w = h;
+            box_width = 2;
+            
+            
+            
+            lis = [];
+            amount = 5;
+            for(i=0;i<amount;i++){
+                x = random(-w/3+box_width,w/3-box_width);
+                y = random(-h/3+box_width,h/3-box_width);
+                ball = new Ball(x,y);
+                append(lis,ball);
+            }
+            
+            // pv = createVector(0,0);
+            // vv = p5.Vector.random2D();
+            // vv.mult(10);
+            
+        }
+        
+        function ball_run(i) {
+            lis[i].wall();
+            // lis[i].colid();
+            lis[i].show();
+            colide(i);
+            // print(i);
+        }
+        
+        function colide(count){
+            for(j=0;j<amount;j++){
+                if(j!=count){
+                    if(dist(lis[count].pos.x,lis[count].pos.y,lis[j].pos.x,lis[j].pos.y)<=(lis[count].siz/2+lis[j].siz/2)){
+                        
+        // 				c_ang = atan(lis[count].vel.y/lis[count].vel.x);
+        // 				j_ang = atan(lis[j].vel.y/lis[j].vel.x);
+        // 				// print(57.2957795*atan(lis[count].vel.y/lis[count].vel.x));
+        // 				// print(57.2957795*atan(lis[j].vel.y/lis[j].vel.x));
+                        
+        // 				c_v_vec = pow(lis[count].vel.y,2) + pow(lis[count].vel.x,2);
+        // 				j_v_vec = pow(lis[j].vel.y,2) + pow(lis[j].vel.x,2);
+                        
+        // 				cal1 = (2*lis[j].siz)/(lis[count].siz+lis[j].siz);
+        // 				cal2 = 
+        // 				n_c_v_vec = c_v_vec - (cal1)*();
+                        
+                        
+                        temp = lis[count].vel.x;
+                      lis[count].vel.x = lis[j].vel.x;
+                        lis[j].vel.x = temp;
+                        
+                        temp = lis[count].vel.y;
+                      lis[count].vel.y = lis[j].vel.y;
+                        lis[j].vel.y = temp;
+                    }
+                }
+            }
+        }
+        
+        
+        function bounding_box(){
+            stroke(255);
+            strokeWeight(box_width);
+            rect(-w/2,-h/2,w,h);
+        }
+        
+        
+        function draw() {
+            background(0);
+            translate(width/2,height/2);
+            
+            // ellipse(w/2-2,h/2-2,1);
+            // position_find(w/2-2,h/2-2);
+        
+            bounding_box();
+            
+            for(i=0;i<amount;i++){
+                // print(i);
+                ball_run(i);
+            }
+            
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pendulum</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    // Your p5.js code here
+    let x = 0;
+    let y = 0;
+    let mas = 50;
+    let leng = 400;
+    let force = 0;
+    let ang = 90;
+    let angV = 0;
+    let angA = 1;
+    let gravity = 1;
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background(100);
+    }
+
+    function draw() {
+      background(0);
+      translate(width / 2, 0);
+
+      angle = ang;
+
+      force = gravity * sin(angle);
+      angA = (-1 * force) / leng;
+
+      angV += angA;
+      ang += angV;
+
+      angV *= 0.999;
+
+      x = leng * sin(angle);
+      y = leng * cos(angle);
+
+      strokeWeight(5);
+      stroke(255);
+      fill(255);
+      line(0, 0, x, y);
+      ellipse(x, y, mas, mas);
+      fill(100);
+      ellipse(x, y, mas * 0.95, mas * 0.95);
+
+      if (mouseIsPressed) {
+        leng += 1;
+      }
+    }
+    
+    // Optional: resize the canvas when the window is resized
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+    
+    // Initialize the p5.js sketch
+    new p5();
+  </script>
+  <script>
+    function redirectToRandomPage() {
+      var pages = [
+      "bear.html",
+      "cow.html",
+      "dear.html",
+      "mouse.html",
+      "pendulum.html",
+      "tiger.html",
+      "elephant.html",
+      "watermelon.html",
+      "cherry.html",
+      "pineapple.html",
+      "peach.html",
+      "strawberry.html",
+      "fibonacci_spiral.html",
+      "multi_swing.html",
+      "fractal_tree.html",
+      "idk1.html",
+      "idk2.html",
+      "3dhtmlblock.html",
+      "hsbcolorblock.html",
+      "chinesecolock.html",
+      "firework.html",
+      "Regularpolygonpath.html",
+      "idk3.html",
+      "idk4.html",
+      "idk5.html",
+      "idk6.html",,
+      "idk7.html",
+      "matrix.html",
+      "languageclock.html",
+      "diceclock.html",
+      "physic.html",
+      "flowers.html",
+      "CubeWave.html",
+      "simpleterrain.html",
+      "sort1.html",
+      "sort2.html",
+      "sort3.html",
+      "sort4.html",
+      "sort5.html",
+      "sort6.html",
+      "pixelanime.html"
+      ];
+        var randomIndex = Math.floor(Math.random() * pages.length);
+        window.location.href = pages[randomIndex];
+    }
+    document.addEventListener("keydown", redirectToRandomPage);
+    document.addEventListener("click", redirectToRandomPage);
+</script>
+</body>
+</html>

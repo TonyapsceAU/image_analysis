@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Elephant Drawing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(400, 400);
+            background(255);
+        }
+
+        function draw() {
+            // tusks outline
+            stroke(0);
+            strokeWeight(30);
+            line(150, 255, 150, 310);
+            line(250, 255, 250, 310);
+
+            // ear
+            stroke(0);
+            strokeWeight(10);
+            fill(150);
+            ellipse(105, 160, 100, 120);
+            ellipse(295, 160, 100, 120);
+
+            // head
+            stroke(0);
+            strokeWeight(10);
+            fill(150);
+            rect(125, 125, 150, 150);
+
+            // trunk
+            rect(175, 220, 50, 130);
+            noStroke();
+            rect(180, 200, 40, 130);
+            stroke(120);
+            line(190, 230, 210, 230);
+            line(190, 250, 210, 250);
+            line(190, 270, 210, 270);
+            line(190, 290, 210, 290);
+            line(190, 310, 210, 310);
+
+            // left eye
+            stroke(0);
+            strokeWeight(20);
+            point(155, 170);
+            point(245, 170);
+
+            // tusks
+            stroke(255);
+            strokeWeight(20);
+            line(150, 255, 150, 310);
+            line(250, 255, 250, 310);
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+            ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>

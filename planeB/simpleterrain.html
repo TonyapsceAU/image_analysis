@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Swing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight,WEBGL);
+            background(100);
+            frameRate(5);
+            triangle_siz = 50;
+            w = windowWidth*0.75;
+            h = w;
+            x_amount = round((w)/triangle_siz);
+            y_amount = round((h)/triangle_siz);
+            noFill();
+            
+            z = [];
+            for(y=0;y<y_amount;y++){
+                temp = [];
+                for(x=0;x<x_amount;x++){
+                    append(temp,round(random(0,triangle_siz)));
+                }
+                append(z,temp);
+            }
+            
+            move = 0;
+        }
+        
+        function draw() {
+            background(100);
+            rotateX(PI/3);
+            
+            translate(-w/2,-h/2);
+            for(y=0;y<y_amount-1;y++){
+                beginShape(TRIANGLE_STRIP);
+                for(x=0;x<x_amount;x++){
+                    x_pos = x*triangle_siz;
+                    ind = y - move;
+                    if(ind<0){
+                        ind+=y_amount-1;
+                    }
+                    vertex(x_pos,y*triangle_siz,z[ind][x]);
+                    vertex(x_pos,(y+1)*triangle_siz,z[ind+1][x]);
+                }
+                // 
+                // print(ind);
+                endShape();
+            }
+            // print(ind);
+            for(x=0;x<x_amount;x++){
+                z[ind+1][x] = round(random(0,triangle_siz));
+            }
+            
+            move++;
+            if(move>=y_amount){
+                move=0;
+            }
+            // print(z);
+        }
+    </script>
+    <script>
+        function redirectToRandomPage() {
+            var pages = [
+            "bear.html",
+            "cow.html",
+            "dear.html",
+            "mouse.html",
+            "pendulum.html",
+            "tiger.html",
+            "elephant.html",
+            "watermelon.html",
+            "cherry.html",
+            "pineapple.html",
+            "peach.html",
+            "strawberry.html",
+            "fibonacci_spiral.html",
+            "multi_swing.html",
+            "fractal_tree.html",
+            "idk1.html",
+            "idk2.html",
+            "3dhtmlblock.html",
+            "hsbcolorblock.html",
+            "chinesecolock.html",
+            "firework.html",
+            "Regularpolygonpath.html",
+            "idk3.html",
+            "idk4.html",
+            "idk5.html",
+            "idk6.html",,
+            "idk7.html",
+            "matrix.html",
+            "languageclock.html",
+            "diceclock.html",
+            "physic.html",
+            "flowers.html",
+            "CubeWave.html",
+            "simpleterrain.html",
+            "sort1.html",
+            "sort2.html",
+            "sort3.html",
+            "sort4.html",
+            "sort5.html",
+            "sort6.html",
+            "pixelanime.html"
+                        ];
+            var randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+        }
+        document.addEventListener("keydown", redirectToRandomPage);
+        document.addEventListener("click", redirectToRandomPage);
+    </script>
+</body>
+</html>
